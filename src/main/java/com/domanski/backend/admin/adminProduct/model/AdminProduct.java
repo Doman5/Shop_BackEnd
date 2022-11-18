@@ -1,6 +1,7 @@
 package com.domanski.backend.admin.adminProduct.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,9 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "product")
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class AdminProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
