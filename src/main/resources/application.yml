@@ -5,4 +5,7 @@ spring:
     password: 1234
   liquibase:
     change-log: classpath:liquibase-changelog.xml
-
+server:
+  error:
+    include-message: always
+    include-binding-errors: always

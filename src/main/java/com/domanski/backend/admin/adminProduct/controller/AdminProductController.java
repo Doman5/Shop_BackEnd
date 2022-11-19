@@ -3,11 +3,12 @@ package com.domanski.backend.admin.adminProduct.controller;
 import com.domanski.backend.admin.adminProduct.dto.AdminProductDto;
 import com.domanski.backend.admin.adminProduct.model.AdminProduct;
 import com.domanski.backend.admin.adminProduct.service.AdminProductService;
-import com.domanski.backend.product.model.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,12 +28,12 @@ public class AdminProductController {
     }
 
     @PostMapping("admin/products")
-    public AdminProduct createProduct(@RequestBody AdminProductDto adminProductDto) {
+    public AdminProduct createProduct(@RequestBody @Valid AdminProductDto adminProductDto) {
         return adminProductService.createProduct(mapProduct(adminProductDto, EMPTY_ID));
     }
 
     @PutMapping("admin/products/{id}")
-    public AdminProduct updateProduct(@RequestBody AdminProductDto adminProductDto,@PathVariable Long id) {
+    public AdminProduct updateProduct(@RequestBody @Valid AdminProductDto adminProductDto, @PathVariable Long id) {
         return adminProductService.updateProduct(mapProduct(adminProductDto,id));
     }
 
@@ -43,7 +44,7 @@ public class AdminProductController {
                 .description(adminProductDto.getDescription())
                 .category(adminProductDto.getCategory())
                 .price(adminProductDto.getPrice())
-                .currency(adminProductDto.getCurrency().toUpperCase())
+                .currency(adminProductDto.getCurrency())
                 .build();
     }
 }
