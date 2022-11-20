@@ -1,14 +1,27 @@
 package com.domanski.backend.admin.adminProduct.controller;
 
 import com.domanski.backend.admin.adminProduct.dto.AdminProductDto;
+import com.domanski.backend.admin.adminProduct.dto.UploadResponse;
 import com.domanski.backend.admin.adminProduct.model.AdminProduct;
+import com.domanski.backend.admin.adminProduct.service.AdminProductImageService;
 import com.domanski.backend.admin.adminProduct.service.AdminProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResourceLoader;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,6 +29,7 @@ public class AdminProductController {
 
     public static final Long EMPTY_ID = null;
     private final AdminProductService adminProductService;
+    private final AdminProductImageService adminProductImageService;
 
     @GetMapping("admin/products")
     public Page<AdminProduct> getProducts(Pageable pageable) {
@@ -41,6 +55,25 @@ public class AdminProductController {
     public void deleteProduct(@PathVariable Long id) {
         adminProductService.deleteProduct(id);
     }
+
+    @PostMapping("admin/products/upload-image")
+    public UploadResponse uploadImage(@RequestParam("file") MultipartFile multipartFile) {
+        try(InputStream inputStream = multipartFile.getInputStream()) {
+            String savedFilename = adminProductImageService.uploadImage(multipartFile.getOriginalFilename(), inputStream);
+            return new UploadResponse(savedFilename);
+        } catch (IOException e) {
+            throw new RuntimeException("błąd zapisu" + e);
+        }
+    }
+
+    @GetMapping("/data/productImage/{filename}")
+    public ResponseEntity<Resource> serveFiles(@PathVariable String filename) throws IOException {
+        Resource file = adminProductImageService.serveFiles(filename);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_TYPE, Files.probeContentType(Path.of(filename)))
+                .body(file);
+    }
+
     private static AdminProduct mapProduct(AdminProductDto adminProductDto, Long id) {
         return AdminProduct.builder()
                 .id(id)
@@ -49,6 +82,7 @@ public class AdminProductController {
                 .category(adminProductDto.getCategory())
                 .price(adminProductDto.getPrice())
                 .currency(adminProductDto.getCurrency())
+                .image(adminProductDto.getImage())
                 .build();
     }
 }
