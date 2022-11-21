@@ -1,5 +1,6 @@
 package com.domanski.backend.admin.adminProduct.model;
 
+import com.domanski.backend.admin.adminCategory.model.AdminCategory;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,8 +20,9 @@ public class AdminProduct {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String category;
+    private Long categoryId;
     private String description;
+    private String fullDescription;
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private AdminProductCurrency currency;
