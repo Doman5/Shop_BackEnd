@@ -1,12 +1,15 @@
 package com.domanski.backend.product.model;
 
 import com.domanski.backend.admin.adminProduct.model.AdminProductCurrency;
+import com.domanski.backend.review.model.Review;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
+
 @Entity
 @Getter
 @NoArgsConstructor
@@ -24,4 +27,7 @@ public class Product {
     private AdminProductCurrency currency;
     private String image;
     private String slug;
+    @OneToMany
+    @JoinColumn(name = "productId")
+    private List<Review> reviews;
 }
