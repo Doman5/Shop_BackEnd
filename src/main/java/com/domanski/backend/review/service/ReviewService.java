@@ -2,7 +2,7 @@ package com.domanski.backend.review.service;
 
 import com.domanski.backend.common.model.Review;
 import com.domanski.backend.review.dto.ReviewDto;
-import com.domanski.backend.review.repository.ReviewRepository;
+import com.domanski.backend.common.repository.ReviewRepository;
 import lombok.AllArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Safelist;
