@@ -1,7 +1,6 @@
-package com.domanski.backend.product.model;
+package com.domanski.backend.common.model;
 
 import com.domanski.backend.admin.adminProduct.model.AdminProductCurrency;
-import com.domanski.backend.review.model.Review;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

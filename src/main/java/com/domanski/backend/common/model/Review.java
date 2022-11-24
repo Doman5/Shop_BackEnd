@@ -1,4 +1,4 @@
-package com.domanski.backend.review.model;
+package com.domanski.backend.common.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

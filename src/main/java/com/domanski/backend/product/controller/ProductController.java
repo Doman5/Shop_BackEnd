@@ -1,6 +1,6 @@
 package com.domanski.backend.product.controller;
-import com.domanski.backend.product.model.Product;
-import com.domanski.backend.product.model.dto.ProductListDto;
+import com.domanski.backend.common.model.Product;
+import com.domanski.backend.common.dto.ProductListDto;
 import com.domanski.backend.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;

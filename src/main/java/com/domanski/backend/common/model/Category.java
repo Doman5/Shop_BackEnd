@@ -1,4 +1,4 @@
-package com.domanski.backend.category.model;
+package com.domanski.backend.common.model;
 import lombok.Getter;
 
 import javax.persistence.*;

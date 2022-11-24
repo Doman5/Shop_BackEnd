@@ -1,4 +1,4 @@
-package com.domanski.backend.review.model.dto;
+package com.domanski.backend.review.dto;
 
 import lombok.Getter;
 import org.hibernate.validator.constraints.Length;

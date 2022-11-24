@@ -1,5 +1,6 @@
 package com.domanski.backend.admin.adminProduct.service;
 
+import com.domanski.backend.admin.common.utils.SlugifyUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.core.io.Resource;
@@ -17,7 +18,7 @@ public class AdminProductImageService {
     @Value("${app.uploadDir}")
     private String uploadDir = "";
     public String uploadImage(String filename, InputStream inputStream) {
-        String newFileName = UploadedFilesUtils.slugifyFileName(filename);
+        String newFileName = SlugifyUtils.slugifyFileName(filename);
         newFileName = ExistingFileNameUtils.renameIfExists(Path.of(uploadDir), newFileName);
         Path filePath = Paths.get(uploadDir).resolve(newFileName);
         try(OutputStream outputStream = Files.newOutputStream(filePath)) {

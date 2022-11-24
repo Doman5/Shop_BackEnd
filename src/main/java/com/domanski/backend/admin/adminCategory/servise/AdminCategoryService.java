@@ -3,11 +3,12 @@ package com.domanski.backend.admin.adminCategory.servise;
 import com.domanski.backend.admin.adminCategory.dto.AdminCategoryDto;
 import com.domanski.backend.admin.adminCategory.model.AdminCategory;
 import com.domanski.backend.admin.adminCategory.repository.AdminCategoryRepository;
-import com.github.slugify.Slugify;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.domanski.backend.admin.common.utils.SlugifyUtils.slugifySlug;
 
 @Service
 @RequiredArgsConstructor
@@ -42,13 +43,7 @@ public class AdminCategoryService {
                 .id(id)
                 .name(categoryDto.getName())
                 .description(categoryDto.getDescription())
-                .slug(slugifyCategoryName(categoryDto.getSlug()))
+                .slug(slugifySlug(categoryDto.getSlug()))
                 .build();
-    }
-
-    private String slugifyCategoryName(String slug) {
-        Slugify slg = new Slugify();
-        return slg.withCustomReplacement("_","-")
-                .slugify(slug);
     }
 }

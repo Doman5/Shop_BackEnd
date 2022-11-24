@@ -1,7 +1,7 @@
 package com.domanski.backend.category.controller;
 
-import com.domanski.backend.category.Dto.CategoryProductsDto;
-import com.domanski.backend.category.model.Category;
+import com.domanski.backend.category.dto.CategoryProductsDto;
+import com.domanski.backend.common.model.Category;
 import com.domanski.backend.category.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;

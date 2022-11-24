@@ -5,9 +5,7 @@ import com.domanski.backend.admin.adminProduct.dto.UploadResponse;
 import com.domanski.backend.admin.adminProduct.model.AdminProduct;
 import com.domanski.backend.admin.adminProduct.service.AdminProductImageService;
 import com.domanski.backend.admin.adminProduct.service.AdminProductService;
-import com.github.slugify.Slugify;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,10 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+
+import static com.domanski.backend.admin.common.utils.SlugifyUtils.slugifySlug;
 
 @RestController
 @RequiredArgsConstructor
@@ -87,11 +85,5 @@ public class AdminProductController {
                 .image(adminProductDto.getImage())
                 .slug(slugifySlug(adminProductDto.getSlug()))
                 .build();
-    }
-
-    private static String slugifySlug(String slug) {
-        Slugify slg = new Slugify();
-        return slg.withCustomReplacement("_","-")
-                .slugify(slug);
     }
 }

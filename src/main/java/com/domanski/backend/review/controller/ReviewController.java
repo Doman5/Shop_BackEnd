@@ -1,7 +1,7 @@
 package com.domanski.backend.review.controller;
 
-import com.domanski.backend.review.model.Review;
-import com.domanski.backend.review.model.dto.ReviewDto;
+import com.domanski.backend.common.model.Review;
+import com.domanski.backend.review.dto.ReviewDto;
 import com.domanski.backend.review.service.ReviewService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

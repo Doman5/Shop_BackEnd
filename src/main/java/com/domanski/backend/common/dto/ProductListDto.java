@@ -1,4 +1,4 @@
-package com.domanski.backend.product.model.dto;
+package com.domanski.backend.common.dto;
 
 import com.domanski.backend.admin.adminProduct.model.AdminProductCurrency;
 import lombok.Builder;

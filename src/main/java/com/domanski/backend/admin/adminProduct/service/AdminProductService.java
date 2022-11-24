@@ -2,7 +2,6 @@ package com.domanski.backend.admin.adminProduct.service;
 
 import com.domanski.backend.admin.adminProduct.model.AdminProduct;
 import com.domanski.backend.admin.adminProduct.repository.AdminProductRepository;
-import com.domanski.backend.product.model.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

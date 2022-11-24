@@ -1,7 +1,7 @@
 package com.domanski.backend.review.service;
 
-import com.domanski.backend.review.model.Review;
-import com.domanski.backend.review.model.dto.ReviewDto;
+import com.domanski.backend.common.model.Review;
+import com.domanski.backend.review.dto.ReviewDto;
 import com.domanski.backend.review.repository.ReviewRepository;
 import lombok.AllArgsConstructor;
 import org.jsoup.Jsoup;

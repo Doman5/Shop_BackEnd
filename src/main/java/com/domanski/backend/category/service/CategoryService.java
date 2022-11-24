@@ -1,11 +1,11 @@
 package com.domanski.backend.category.service;
 
-import com.domanski.backend.category.Dto.CategoryProductsDto;
-import com.domanski.backend.category.model.Category;
+import com.domanski.backend.category.dto.CategoryProductsDto;
+import com.domanski.backend.common.model.Category;
 import com.domanski.backend.category.repository.CategoryRepository;
-import com.domanski.backend.product.model.Product;
-import com.domanski.backend.product.model.dto.ProductListDto;
-import com.domanski.backend.product.repository.ProductRepository;
+import com.domanski.backend.common.model.Product;
+import com.domanski.backend.common.dto.ProductListDto;
+import com.domanski.backend.common.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
