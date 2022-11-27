@@ -57,11 +57,10 @@ public class CartMapper {
     }
 
     private static BigDecimal sumValues(List<CartItem> cartItems) {
-        BigDecimal sum;
         return cartItems.stream()
                 .map(CartMapper::calculateLineValue)
                 .reduce((BigDecimal::add))
-                .orElseThrow();
+                .orElse(BigDecimal.ZERO);
     }
 }
 
