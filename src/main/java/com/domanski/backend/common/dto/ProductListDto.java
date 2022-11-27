@@ -1,6 +1,5 @@
 package com.domanski.backend.common.dto;
 
-import com.domanski.backend.admin.adminProduct.model.AdminProductCurrency;
 import lombok.Builder;
 import lombok.Getter;
 import java.math.BigDecimal;
@@ -12,7 +11,7 @@ public class ProductListDto {
     private String name;
     private String description;
     private BigDecimal price;
-    private AdminProductCurrency currency;
+    private String currency;
     private String image;
     private String slug;
 }

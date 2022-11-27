@@ -1,7 +1,7 @@
 package com.domanski.backend.common.model;
 
-import com.domanski.backend.admin.adminProduct.model.AdminProductCurrency;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,8 +22,7 @@ public class Product {
     private String description;
     private String fullDescription;
     private BigDecimal price;
-    @Enumerated(EnumType.STRING)
-    private AdminProductCurrency currency;
+    private String currency;
     private String image;
     private String slug;
 }
