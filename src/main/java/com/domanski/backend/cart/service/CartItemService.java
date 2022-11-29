@@ -1,6 +1,6 @@
 package com.domanski.backend.cart.service;
 
-import com.domanski.backend.cart.repository.CartItemRepository;
+import com.domanski.backend.common.repository.CartItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

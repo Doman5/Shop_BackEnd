@@ -1,8 +1,8 @@
 package com.domanski.backend.cart.service;
 
-import com.domanski.backend.cart.model.Cart;
-import com.domanski.backend.cart.repository.CartItemRepository;
-import com.domanski.backend.cart.repository.CartRepository;
+import com.domanski.backend.common.model.Cart;
+import com.domanski.backend.common.repository.CartItemRepository;
+import com.domanski.backend.common.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;

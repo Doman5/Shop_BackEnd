@@ -1,4 +1,4 @@
-package com.domanski.backend.cart.model;
+package com.domanski.backend.common.model;
 
 import java.util.ArrayList;
 import java.util.List;

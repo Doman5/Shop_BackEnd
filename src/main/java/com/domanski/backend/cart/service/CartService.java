@@ -1,9 +1,9 @@
 package com.domanski.backend.cart.service;
 
-import com.domanski.backend.cart.model.Cart;
-import com.domanski.backend.cart.model.CartItem;
-import com.domanski.backend.cart.model.dto.CartProductDto;
-import com.domanski.backend.cart.repository.CartRepository;
+import com.domanski.backend.common.model.Cart;
+import com.domanski.backend.common.model.CartItem;
+import com.domanski.backend.cart.dto.CartProductDto;
+import com.domanski.backend.common.repository.CartRepository;
 import com.domanski.backend.common.model.Product;
 import com.domanski.backend.common.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;

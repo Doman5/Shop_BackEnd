@@ -1,8 +1,8 @@
 package com.domanski.backend.cart.service;
 
-import com.domanski.backend.cart.model.Cart;
-import com.domanski.backend.cart.model.dto.CartProductDto;
-import com.domanski.backend.cart.repository.CartRepository;
+import com.domanski.backend.common.model.Cart;
+import com.domanski.backend.cart.dto.CartProductDto;
+import com.domanski.backend.common.repository.CartRepository;
 import com.domanski.backend.common.model.Product;
 import com.domanski.backend.common.repository.ProductRepository;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static net.bytebuddy.matcher.ElementMatchers.any;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
 

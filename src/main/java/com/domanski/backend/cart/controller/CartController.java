@@ -2,7 +2,7 @@ package com.domanski.backend.cart.controller;
 
 import com.domanski.backend.cart.controller.dto.CartSummaryDto;
 import com.domanski.backend.cart.controller.mapper.CartMapper;
-import com.domanski.backend.cart.model.dto.CartProductDto;
+import com.domanski.backend.cart.dto.CartProductDto;
 import com.domanski.backend.cart.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

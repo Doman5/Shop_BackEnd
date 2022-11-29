@@ -1,6 +1,5 @@
-package com.domanski.backend.cart.model;
+package com.domanski.backend.common.model;
 
-import com.domanski.backend.common.model.Product;
 import lombok.*;
 
 import javax.persistence.*;

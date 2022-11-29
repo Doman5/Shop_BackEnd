@@ -4,8 +4,8 @@ import com.domanski.backend.cart.controller.dto.CartSummaryDto;
 import com.domanski.backend.cart.controller.dto.CartSummaryItemDto;
 import com.domanski.backend.cart.controller.dto.ProductDto;
 import com.domanski.backend.cart.controller.dto.SummaryDto;
-import com.domanski.backend.cart.model.Cart;
-import com.domanski.backend.cart.model.CartItem;
+import com.domanski.backend.common.model.Cart;
+import com.domanski.backend.common.model.CartItem;
 import com.domanski.backend.common.model.Product;
 
 import java.math.BigDecimal;
