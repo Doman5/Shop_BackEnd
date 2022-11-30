@@ -1,5 +1,6 @@
 package com.domanski.backend.order.service;
 
+import com.domanski.backend.common.mail.EmailClientService;
 import com.domanski.backend.common.model.Cart;
 import com.domanski.backend.common.model.CartItem;
 import com.domanski.backend.common.repository.CartItemRepository;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -33,6 +35,8 @@ public class OrderService {
     private final CartItemRepository cartItemRepository;
     private final ShipmentRepository shipmentRepository;
     private final PaymentRepository paymentRepository;
+//    Search mail host and set it in config because gmail don't support unsafe apps(work only FakeEmailService)
+    private final EmailClientService emailClientService;
 
     @Transactional
     public OrderSummary placeOrder(OrderDto orderDto) {
@@ -57,7 +61,7 @@ public class OrderService {
 
         cartItemRepository.deleteByCartId(orderDto.getCartId());
         cartRepository.deleteById(orderDto.getCartId());
-
+        emailClientService.getInstance().send(order.getEmail(), "Twoje zamówienie zostało przyjęte", createEmailMessage(order));
         return OrderSummary.builder()
                 .id(newOrder.getId())
                 .placeDate(newOrder.getPlaceDate())
@@ -65,6 +69,16 @@ public class OrderService {
                 .grossValue(newOrder.getGrossValue())
                 .payment(newOrder.getPayment())
                 .build();
+    }
+
+    private String createEmailMessage(Order order) {
+        return "Twoje zamówienie o id: " + order.getId() +
+                "\n Data złożenia: " + order.getPlaceDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) +
+                "\n Wartość " + order.getGrossValue() + "PLN" +
+                "\n\n" +
+                "\n Płatność: " + order.getPayment().getName() +
+                (order.getPayment().getNote() != null ? "\n" + order.getPayment().getNote() : "") +
+                "\n\n Dziękujemy za zakupy.";
     }
 
     private BigDecimal calculateGrossValue(List<CartItem> cartItems, Shipment shipment) {
