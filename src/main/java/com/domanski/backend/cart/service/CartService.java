@@ -10,8 +10,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
+
+
+import static java.time.LocalDateTime.now;
 
 @Service
 @RequiredArgsConstructor
@@ -41,9 +43,13 @@ public class CartService {
 
     private Cart getInitializedCart(Long id) {
         if(id == null || id <= 0) {
-            return cartRepository.save(Cart.builder().created(LocalDateTime.now()).build());
+            return cartRepository.save(Cart.builder().created(now()).build());
         }
-        return cartRepository.findById(id).orElseThrow();
+        return cartRepository.findById(id).orElseGet(this::saveNewCart);
+    }
+
+    private Cart saveNewCart() {
+        return cartRepository.save(Cart.builder().created(now()).build());
     }
 
     @Transactional
