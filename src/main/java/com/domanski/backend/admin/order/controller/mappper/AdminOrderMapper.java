@@ -3,25 +3,28 @@ package com.domanski.backend.admin.order.controller.mappper;
 import com.domanski.backend.admin.order.model.AdminOrder;
 import com.domanski.backend.admin.order.controller.dto.AdminOrderDto;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+
+import java.util.List;
 
 public class AdminOrderMapper {
 
+    public static Page<AdminOrderDto> mapToPageDtos(Page<AdminOrder> orders) {
+        return new PageImpl<>(mapToDtoList(orders.getContent()), orders.getPageable(), orders.getTotalElements());
+    }
 
-    public static Page<AdminOrderDto> mapToPageDtos(Page<AdminOrder> allAdminOrders) {
-        return allAdminOrders
-                .map(adminOrder -> AdminOrderDto.builder()
-                        .id(adminOrder.getId())
-                        .placeDate(adminOrder.getPlaceDate())
-                        .orderStatus(adminOrder.getOrderStatus())
-                        .grossValue(adminOrder.getGrossValue())
-                        .firstname(adminOrder.getFirstname())
-                        .lastname(adminOrder.getLastname())
-                        .street(adminOrder.getStreet())
-                        .zipcode(adminOrder.getZipcode())
-                        .city(adminOrder.getCity())
-                        .email(adminOrder.getEmail())
-                        .phone(adminOrder.getPhone())
-                        .payment(adminOrder.getPayment())
-                        .build());
+    private static List<AdminOrderDto> mapToDtoList(List<AdminOrder> content) {
+        return content.stream()
+                .map(AdminOrderMapper::mapToAdminOrderDto)
+                .toList();
+    }
+
+    private static AdminOrderDto mapToAdminOrderDto(AdminOrder adminOrder) {
+        return AdminOrderDto.builder()
+                .id(adminOrder.getId())
+                .orderStatus(adminOrder.getOrderStatus())
+                .placeDate(adminOrder.getPlaceDate())
+                .grossValue(adminOrder.getGrossValue())
+                .build();
     }
 }

@@ -28,5 +28,5 @@ public class AdminOrderRow {
     private BigDecimal price;
     @OneToOne
     @JoinColumn(name = "shipmentId")
-    private Shipment shipmentId;
+    private Shipment shipment;
 }
