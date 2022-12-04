@@ -16,6 +16,6 @@ public class AdminOrderStatsController {
 
     @GetMapping
     public AdminOrderStats getOrderStatistic() {
-        return adminOrderStatsService.getStatistic();
+        return adminOrderStatsService.getStatistics();
     }
 }
