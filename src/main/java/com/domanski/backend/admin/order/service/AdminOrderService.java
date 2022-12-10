@@ -2,9 +2,9 @@ package com.domanski.backend.admin.order.service;
 
 import com.domanski.backend.admin.order.model.AdminOrder;
 import com.domanski.backend.admin.order.model.AdminOrderLog;
-import com.domanski.backend.admin.order.model.AdminOrderStatus;
 import com.domanski.backend.admin.order.repository.AdminOrderLogRepository;
 import com.domanski.backend.admin.order.repository.AdminOrderRepository;
+import com.domanski.backend.common.model.OrderStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -52,8 +52,8 @@ public class AdminOrderService {
     }
 
     private void processOrderStatusChange(AdminOrder order, Map<String, String> values) {
-        AdminOrderStatus oldStatus = order.getOrderStatus();
-        AdminOrderStatus newStatus = AdminOrderStatus.valueOf(values.get("orderStatus"));
+        OrderStatus oldStatus = order.getOrderStatus();
+        OrderStatus newStatus = OrderStatus.valueOf(values.get("orderStatus"));
         if(oldStatus == newStatus) {
             return;
         }
@@ -64,7 +64,7 @@ public class AdminOrderService {
 
 
 
-    private void logStatusChange(Long orderId, AdminOrderStatus oldStatus, AdminOrderStatus newStatus) {
+    private void logStatusChange(Long orderId, OrderStatus oldStatus, OrderStatus newStatus) {
         adminOrderLogRepository.save(AdminOrderLog.builder()
                         .orderId(orderId)
                         .created(LocalDateTime.now())

@@ -7,7 +7,6 @@ import com.domanski.backend.common.model.CartItem;
 import com.domanski.backend.common.model.Product;
 import com.domanski.backend.common.repository.CartItemRepository;
 import com.domanski.backend.common.repository.CartRepository;
-import com.domanski.backend.order.model.OrderStatus;
 import com.domanski.backend.order.model.Payment;
 import com.domanski.backend.order.model.PaymentType;
 import com.domanski.backend.order.model.Shipment;

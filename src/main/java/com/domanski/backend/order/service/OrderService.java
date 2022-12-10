@@ -9,13 +9,17 @@ import com.domanski.backend.order.model.Payment;
 import com.domanski.backend.order.model.Shipment;
 import com.domanski.backend.order.model.dto.OrderDto;
 import com.domanski.backend.order.model.dto.OrderSummary;
+import com.domanski.backend.order.model.dto.OrderListDto;
 import com.domanski.backend.order.repository.OrderRepository;
 import com.domanski.backend.order.repository.OrderRowsRepository;
 import com.domanski.backend.order.repository.PaymentRepository;
 import com.domanski.backend.order.repository.ShipmentRepository;
+import com.domanski.backend.order.service.mapper.OrderDtoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static com.domanski.backend.order.service.mapper.OrderEmailMessageMapper.createEmailMessage;
 import static com.domanski.backend.order.service.mapper.OrderMapper.createNewOrder;
@@ -72,6 +76,12 @@ public class OrderService {
         cart.getCartItems().stream()
                 .map(cartItem -> mapToOrderRowWithQuantity(orderId, cartItem))
                 .peek(orderRowsRepository::save)
+                .toList();
+    }
+
+    public List<OrderListDto> getOrders(Long userId) {
+        return orderRepository.findByUserId(userId).stream()
+                .map(OrderDtoMapper::mapToOrderListDto)
                 .toList();
     }
 

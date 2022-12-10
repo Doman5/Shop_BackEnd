@@ -1,5 +1,6 @@
 package com.domanski.backend.order.model;
 
+import com.domanski.backend.common.model.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

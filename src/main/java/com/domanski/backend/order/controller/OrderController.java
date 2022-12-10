@@ -2,6 +2,7 @@ package com.domanski.backend.order.controller;
 
 import com.domanski.backend.order.model.dto.InitOrder;
 import com.domanski.backend.order.model.dto.OrderDto;
+import com.domanski.backend.order.model.dto.OrderListDto;
 import com.domanski.backend.order.model.dto.OrderSummary;
 import com.domanski.backend.order.service.OrderService;
 import com.domanski.backend.order.service.PaymentService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,6 +39,12 @@ public class OrderController {
                 .build();
     }
 
-
-
+    @GetMapping
+    public List<OrderListDto> getOrders(@AuthenticationPrincipal Long userId) {
+        if(userId != null) {
+            return orderService.getOrders(userId);
+        } else {
+            throw new IllegalArgumentException("Brak użytkownika");
+        }
+    }
 }

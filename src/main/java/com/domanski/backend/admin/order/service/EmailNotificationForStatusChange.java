@@ -1,8 +1,8 @@
 package com.domanski.backend.admin.order.service;
 
 import com.domanski.backend.admin.order.model.AdminOrder;
-import com.domanski.backend.admin.order.model.AdminOrderStatus;
 import com.domanski.backend.common.mail.EmailClientService;
+import com.domanski.backend.common.model.OrderStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +16,14 @@ class EmailNotificationForStatusChange {
 
     private final EmailClientService emailClientService;
 
-    public void sendEmailNotification(AdminOrderStatus newStatus, AdminOrder order) {
-        if(newStatus == AdminOrderStatus.PROCESSING) {
+    public void sendEmailNotification(OrderStatus newStatus, AdminOrder order) {
+        if(newStatus == OrderStatus.PROCESSING) {
             sendEmail(order.getEmail(), "Zamówienie " + order.getId() + " zmienioło status na " + newStatus.getValue(),
                     createProcessingEmailMessage(order.getId(), newStatus));
-        } else if (newStatus == AdminOrderStatus.COMPLETED) {
+        } else if (newStatus == OrderStatus.COMPLETED) {
             sendEmail(order.getEmail(), "Zamówienie " + order.getId() + " zostało zrealizowane",
                     createCompletedEmailMessage(order.getId(), newStatus));
-        } else if (newStatus == AdminOrderStatus.REFUND) {
+        } else if (newStatus == OrderStatus.REFUND) {
             sendEmail(order.getEmail(), "Zamówienie " + order.getId() + " zostało zwrócone",
                     createRefundEmailMessage(order.getId(), newStatus));
         }

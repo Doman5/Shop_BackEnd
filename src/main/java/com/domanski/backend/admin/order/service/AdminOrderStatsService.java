@@ -1,9 +1,9 @@
 package com.domanski.backend.admin.order.service;
 
 import com.domanski.backend.admin.order.model.AdminOrder;
-import com.domanski.backend.admin.order.model.AdminOrderStatus;
 import com.domanski.backend.admin.order.model.dto.AdminOrderStats;
 import com.domanski.backend.admin.order.repository.AdminOrderRepository;
+import com.domanski.backend.common.model.OrderStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,7 @@ public class AdminOrderStatsService {
         List<AdminOrder> orders = adminOrderRepository.findAllByPlaceDateIsBetweenAndOrderStatus(
                 from,
                 to,
-                AdminOrderStatus.COMPLETED);
+                OrderStatus.COMPLETED);
 
         TreeMap<Integer, AdminOrderStatsValue> result =
                 IntStream.rangeClosed(from.getDayOfMonth(), to.getDayOfMonth())

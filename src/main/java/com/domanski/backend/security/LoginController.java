@@ -28,46 +28,48 @@ import java.util.List;
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;
-
-    private final long expirationTime;
-    private final String secret;
     private final UserRepository userRepository;
 
+    private long expirationTime;
+    private String secret;
+
     public LoginController(AuthenticationManager authenticationManager,
+                           UserRepository userRepository,
                            @Value("${jwt.expirationTime}") long expirationTime,
-                           @Value("${jwt.secret}") String secret, UserRepository userRepository) {
+                           @Value("${jwt.secret}") String secret) {
         this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
         this.expirationTime = expirationTime;
         this.secret = secret;
-        this.userRepository = userRepository;
     }
 
     @PostMapping("/login")
-    public Token login(@RequestBody LoginCredentials loginCredentials ) {
-        return authenticate(loginCredentials.username, loginCredentials.password);
+    public Token login(@RequestBody LoginCredentials loginCredentials) {
+        return authenticate(loginCredentials.getUsername(), loginCredentials.getPassword());
     }
 
     @PostMapping("/register")
     public Token register(@RequestBody @Valid RegisterCredentials registerCredentials) {
-        if(!registerCredentials.password.equals(registerCredentials.repeatPassword)) {
+        if (!registerCredentials.getPassword().equals(registerCredentials.getRepeatPassword())) {
             throw new IllegalArgumentException("Hasła nie są identyczne");
         }
-        if(userRepository.existsByUsername(registerCredentials.username)) {
-            throw new IllegalArgumentException("Taki użytkownika już istnieje w bazie");
+        if (userRepository.existsByUsername(registerCredentials.getUsername())) {
+            throw new IllegalArgumentException("Taki uźytkownik już istnieje w bazie danych");
         }
         userRepository.save(User.builder()
-                        .username(registerCredentials.username)
-                        .password("{bcrypt}" + new BCryptPasswordEncoder().encode(registerCredentials.password))
-                        .enabled(true)
-                        .authorities(List.of(UserRole.ROLE_CUSTOMER))
-                        .build());
-                return authenticate(registerCredentials.username, registerCredentials.password);
+                .username(registerCredentials.getUsername())
+                .password("{bcrypt}" + new BCryptPasswordEncoder().encode(registerCredentials.getPassword()))
+                .enabled(true)
+                .authorities(List.of(UserRole.ROLE_CUSTOMER))
+                .build());
+        return authenticate(registerCredentials.getUsername(), registerCredentials.getPassword());
     }
 
     private Token authenticate(String username, String password) {
+        User user = userRepository.findByUsername(username).orElseThrow();
 
         Authentication authenticate = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, password)
+                new UsernamePasswordAuthenticationToken(user.getId(), password)
         );
         ShopUserDetails principal = (ShopUserDetails) authenticate.getPrincipal();
         String token = JWT.create()
@@ -80,12 +82,10 @@ public class LoginController {
                 .map(s -> true)
                 .findFirst()
                 .orElse(false));
-
     }
 
     @Getter
     private static class LoginCredentials {
-
         private String username;
         private String password;
     }

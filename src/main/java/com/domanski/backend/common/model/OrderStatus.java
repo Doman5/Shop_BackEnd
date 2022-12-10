@@ -1,6 +1,6 @@
-package com.domanski.backend.admin.order.model;
+package com.domanski.backend.common.model;
 
-public enum AdminOrderStatus {
+public enum OrderStatus {
     NEW("nowe"),
     PAID("opłacone"),
     PROCESSING("Przetwarzane"),
@@ -11,7 +11,7 @@ public enum AdminOrderStatus {
 
     private final String value;
 
-    AdminOrderStatus(String value) {
+    OrderStatus(String value) {
         this.value = value;
     }
 

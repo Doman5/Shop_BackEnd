@@ -1,10 +1,10 @@
 package com.domanski.backend.admin.order.service;
 
-import com.domanski.backend.admin.order.model.AdminOrderStatus;
+import com.domanski.backend.common.model.OrderStatus;
 
 public class AdminOrderEmailService {
 
-    public static String createProcessingEmailMessage(Long id, AdminOrderStatus status) {
+    public static String createProcessingEmailMessage(Long id, OrderStatus status) {
         return "Twoje zamównienie: " + id + "jest przetwarzane." +
                 "\nStatus został zmieniony na " + status.getValue() +
                 "\nTwoje zamówienie jest przetwarzane przez naszych pracowników" +
@@ -13,14 +13,14 @@ public class AdminOrderEmailService {
                 "\n Sklep Shop";
     }
 
-    public static String createCompletedEmailMessage(Long id, AdminOrderStatus status) {
+    public static String createCompletedEmailMessage(Long id, OrderStatus status) {
         return "Twoje zamówieni o id " + id + " zostało zrealizowane." +
                 "\nStatus twojego zamówienia został zmieniony na: " + status.getValue() +
                 "\n\n Dziękujemy za zakupy i zapraszamy ponownie" +
                 "\n Sklep Shop";
     }
 
-    public static String createRefundEmailMessage(Long id, AdminOrderStatus status) {
+    public static String createRefundEmailMessage(Long id, OrderStatus status) {
         return "Twoje zamówieni o id " + id + " zostało wrócone." +
                 "\nStatus twojego zamówienia został zmieniony na: " + status.getValue() +
                 "\n\n Pozdrawiamy" +

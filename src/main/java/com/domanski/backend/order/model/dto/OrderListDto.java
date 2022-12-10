@@ -1,4 +1,4 @@
-package com.domanski.backend.admin.order.controller.dto;
+package com.domanski.backend.order.model.dto;
 
 import com.domanski.backend.common.model.OrderStatus;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Builder
-public class AdminOrderDto {
+public class OrderListDto {
     private Long id;
     private LocalDateTime placeDate;
     private OrderStatus orderStatus;

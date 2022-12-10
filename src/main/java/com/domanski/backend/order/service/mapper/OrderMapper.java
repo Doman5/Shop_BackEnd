@@ -2,9 +2,9 @@ package com.domanski.backend.order.service.mapper;
 
 import com.domanski.backend.common.model.Cart;
 import com.domanski.backend.common.model.CartItem;
+import com.domanski.backend.common.model.OrderStatus;
 import com.domanski.backend.order.model.Order;
 import com.domanski.backend.order.model.OrderRow;
-import com.domanski.backend.order.model.OrderStatus;
 import com.domanski.backend.order.model.Payment;
 import com.domanski.backend.order.model.Shipment;
 import com.domanski.backend.order.model.dto.OrderDto;
