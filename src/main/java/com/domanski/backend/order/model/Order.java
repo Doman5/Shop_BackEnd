@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -46,4 +45,5 @@ public class Order {
     private String phone;
     @OneToOne
     private Payment payment;
+    private Long userId;
 }

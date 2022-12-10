@@ -10,7 +10,6 @@ import java.util.Collection;
 @Getter
 @Setter
 public class ShopUserDetails extends User {
-
     private Long id;
 
     public ShopUserDetails(String username, String password, Collection<? extends GrantedAuthority> authorities) {
