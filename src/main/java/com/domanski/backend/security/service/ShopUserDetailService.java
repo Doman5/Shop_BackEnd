@@ -1,4 +1,4 @@
-package com.domanski.backend.security;
+package com.domanski.backend.security.service;
 
 import com.domanski.backend.security.model.ShopUserDetails;
 import com.domanski.backend.security.model.User;

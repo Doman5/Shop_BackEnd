@@ -1,4 +1,4 @@
-package com.domanski.backend.security;
+package com.domanski.backend.security.contoller;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -30,8 +30,8 @@ public class LoginController {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
 
-    private long expirationTime;
-    private String secret;
+    private final long expirationTime;
+    private final String secret;
 
     public LoginController(AuthenticationManager authenticationManager,
                            UserRepository userRepository,
