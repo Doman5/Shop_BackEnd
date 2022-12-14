@@ -2,6 +2,7 @@ package com.domanski.backend.security.contoller;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.domanski.backend.security.exception.RegisterException;
 import com.domanski.backend.security.model.ShopUserDetails;
 import com.domanski.backend.security.model.User;
 import com.domanski.backend.security.model.UserRole;
@@ -51,10 +52,10 @@ public class LoginController {
     @PostMapping("/register")
     public Token register(@RequestBody @Valid RegisterCredentials registerCredentials) {
         if (!registerCredentials.getPassword().equals(registerCredentials.getRepeatPassword())) {
-            throw new IllegalArgumentException("Hasła nie są identyczne");
+            throw new RegisterException("Hasła nie są identyczne");
         }
         if (userRepository.existsByUsername(registerCredentials.getUsername())) {
-            throw new IllegalArgumentException("Taki uźytkownik już istnieje w bazie danych");
+            throw new RegisterException("Taki uźytkownik już istnieje w bazie danych");
         }
         userRepository.save(User.builder()
                 .username(registerCredentials.getUsername())
