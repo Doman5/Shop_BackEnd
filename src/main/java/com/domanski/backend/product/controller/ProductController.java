@@ -5,6 +5,7 @@ import com.domanski.backend.product.service.ProductService;
 import com.domanski.backend.product.service.dto.ProductDto;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -21,6 +22,7 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
+
     @GetMapping("/products")
     public Page<ProductListDto> getProducts(Pageable pageable) {
         Page<Product> products = productService.getProducts(pageable);
@@ -40,6 +42,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/{slug}")
+    @Cacheable("productBySlug")
     public ProductDto getProduct(@PathVariable
                                     @Pattern(regexp = "[a-z0-9\\-]+")
                                     @Length(max = 255)

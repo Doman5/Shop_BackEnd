@@ -6,6 +6,7 @@ import com.domanski.backend.admin.product.model.AdminProduct;
 import com.domanski.backend.admin.product.service.AdminProductImageService;
 import com.domanski.backend.admin.product.service.AdminProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +46,7 @@ public class AdminProductController {
         return adminProductService.createProduct(mapProduct(adminProductDto, EMPTY_ID));
     }
 
+    @CacheEvict(cacheNames = "productBySlug", key = "#adminProductDto.slug")
     @PutMapping("admin/products/{id}")
     public AdminProduct updateProduct(@RequestBody @Valid AdminProductDto adminProductDto, @PathVariable Long id) {
         return adminProductService.updateProduct(mapProduct(adminProductDto,id));
@@ -71,6 +73,11 @@ public class AdminProductController {
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_TYPE, Files.probeContentType(Path.of(filename)))
                 .body(file);
+    }
+
+    @GetMapping("admin/products/clearCache")
+    @CacheEvict(value = "productBySlug")
+    public void clearProductsCache() {
     }
 
     private static AdminProduct mapProduct(AdminProductDto adminProductDto, Long id) {
