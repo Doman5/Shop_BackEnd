@@ -40,6 +40,7 @@ public class ProductService {
                 .fullDescription(product.getFullDescription())
                 .image(product.getImage())
                 .price(product.getPrice())
+                .salePrice(product.getSalePrice())
                 .currency(product.getCurrency())
                 .categoryId(product.getCategoryId())
                 .slug(product.getSlug())

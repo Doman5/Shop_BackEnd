@@ -55,14 +55,14 @@ public class OrderMapper {
         return OrderRow.builder()
                 .quantity(cartItem.getQuantity())
                 .productId(cartItem.getProduct().getId())
-                .price(cartItem.getProduct().getPrice())
+                .price(cartItem.getProduct().getEndPrice())
                 .orderId(orderId)
                 .build();
     }
 
     private static BigDecimal calculateGrossValue(List<CartItem> cartItems, Shipment shipment) {
         return cartItems.stream()
-                .map(cartItem -> cartItem.getProduct().getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())))
+                .map(cartItem -> cartItem.getProduct().getEndPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())))
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO)
                 .add(shipment.getPrice());
