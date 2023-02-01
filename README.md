@@ -1,6 +1,7 @@
 # Shop_Backend
 
 ### This is shop backend application.
+### Application is part of cours "Kurs aplikacji webowych" from NullPointerException.pl and was written with instructor.
 ### Application is made in the form of a rest api.
 ### I also create frontend app for this application: https://github.com/Doman5/Shop_Frontend
 
@@ -48,6 +49,6 @@
  you muss have created database named kursaplikacji working on port 3306 
  ```
  mvn package
- java -jar carRent-0.0.1-SNAPSHOT.jar
+ java -jar kursAplikacji-0.0.1-SNAPSHOT.jar
  ```
  after this can you view documentation on http://localhost:8080/swagger-ui/index.html
